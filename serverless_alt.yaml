@@ -1,0 +1,30 @@
+service: foobar
+
+plugins:
+  - serverless-offline
+
+provider:
+  memorySize: 128
+  name: aws
+  region: us-east-1
+  runtime: nodejs12.x
+  stage: dev
+  versionFunctions: false
+
+functions:
+  hello:
+    events:
+      - http:
+          method: post
+          path: /hello
+          request:
+            schema:
+              application/json:
+                $schema: http://json-schema.org/draft-07/schema
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+    handler: dummy
